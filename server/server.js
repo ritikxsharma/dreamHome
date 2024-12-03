@@ -3,7 +3,7 @@ const dotenv = require(`dotenv`)
 const connectDB = require(`./database/config`)
 const morgan = require(`morgan`)
 const cors = require(`cors`)
-const errorHandler = require('./middlewares/errorHandler')
+const { errorHandler } = require('./middlewares/errorHandler')
 
 dotenv.config()
 const app = express()

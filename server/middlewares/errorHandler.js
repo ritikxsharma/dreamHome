@@ -1,10 +1,18 @@
+const statusCodes = {
+    BAD_REQUEST: 400,
+    UNAUTHORIZED: 401,
+    FORBIDDEN: 403,
+    NOT_FOUND: 404,
+    INTERNAL_SERVER_ERROR: 500
+}
+
 const errorHandler = (err, req, res, next) => {
-    const statusCode = err.statusCode || 500
+    const statusCode = err.statusCode || statusCodes.INTERNAL_SERVER_ERROR
     const env = process.env.NODE_ENV || `development`
 
     if(env === 'production'){
         res.status(statusCode).json({
-            message: 'Something went wrong. Please try again later.'
+            message: err.message || 'Something went wrong. Please try again later.'
         })
     }else{
         res.status(statusCode).json({
@@ -14,4 +22,7 @@ const errorHandler = (err, req, res, next) => {
     }
 }
 
-module.exports = errorHandler
+module.exports = {
+    statusCodes,
+    errorHandler
+}

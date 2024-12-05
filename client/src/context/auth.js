@@ -1,4 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { SERVER_API } from '../config'
 
 const AuthContext = createContext()
 
@@ -8,6 +10,13 @@ const AuthProvider = ({ children }) => {
         token: "",
         refreshToken: ""
     })
+
+    useEffect(() => {
+        let fromLS = localStorage.getItem("auth")
+        if(fromLS)  setAuth(JSON.parse(fromLS))
+    }, [])
+
+    axios.defaults.baseURL = SERVER_API
 
     return (
         <AuthContext.Provider value={[auth, setAuth]}>

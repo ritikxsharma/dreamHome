@@ -10,7 +10,6 @@ const Home = () => {
         <h1 className='display-1 bg-primary text-light p-5'>
             Home
         </h1>
-        <pre>{JSON.stringify(auth)}</pre>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth"
+import Sidebar from "./Sidebar";
 
 const Main = () => {
 
@@ -42,23 +43,24 @@ const Main = () => {
 
       {
         loggedIn ? (
-          <div className="dropdown">
-          <li>
-            <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                { auth?.user?.name || auth.user.username }
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <NavLink className="nav-link" to='/dashboard'>
-                  Dashboard
-                </NavLink>
-              </li>
-              <li>
-                <a className="nav-link" style={{cursor: "pointer"}} onClick={handleLogout}>Logout</a>
-              </li>
-            </ul>
-          </li>
-        </div>
+        //   <div className="dropdown">
+        //   <li>
+        //     <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+        //         { auth?.user?.name || auth.user.username }
+        //     </a>
+        //     <ul className="dropdown-menu">
+        //       <li>
+        //         <NavLink className="nav-link" to='/dashboard'>
+        //           Dashboard
+        //         </NavLink>
+        //       </li>
+        //       <li>
+        //         <a className="nav-link" style={{cursor: "pointer"}} onClick={handleLogout}>Logout</a>
+        //       </li>
+        //     </ul>
+        //   </li>
+        // </div>
+        <Sidebar />
         ) : ""
       }
     </nav>

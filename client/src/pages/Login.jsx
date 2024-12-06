@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/auth'
 
 const Login = () => {
@@ -63,6 +63,9 @@ const Login = () => {
                 {loading ? "Waiting" : `Login`}
               </button>
             </form>
+          
+            <Link className="text-danger" to="/forgot-password">forgot password</Link>
+
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ const forgotPassword = (token) => {
     return `
         <p>Reset your password now.</p>
         <p>Click on the link below and reset you password</p>
-        <a href="${process.env.CLIENT_URL}/auth/forgot-password/${token}">Reset my password</a>
+        <a href="${process.env.CLIENT_URL}/auth/access-account/${token}">Reset my password</a>
     `
 }
 

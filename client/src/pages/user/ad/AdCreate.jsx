@@ -1,15 +1,15 @@
 import React from 'react'
-import Tabs from '../../components/navigation/Tabs'
+import Tabs from '../../../components/navigation/Tabs'
 
-const Dashboard = () => {
+const AdCreate = () => {
   return (
     <div>
         <h1 className='display-1 bg-primary text-light p-5'>
-            User Dashboard
+            Ad Create
         </h1>
         <Tabs />
     </div>
   )
 }
 
-export default Dashboard
+export default AdCreate

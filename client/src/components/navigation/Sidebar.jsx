@@ -31,7 +31,7 @@ const Sidebar = () => {
           {auth.user?.name || auth.user.username}
         </button>
         <div
-          className="offcanvas offcanvas-start"
+          className="offcanvas offcanvas-end"
           data-bs-backdrop="static"
           tabIndex={-1}
           id="staticBackdrop"
@@ -49,15 +49,15 @@ const Sidebar = () => {
             />
           </div>
           <div classname="offcanvas-body">
-            <ul>
+            <ul style={{}}>
               <li>
-                <NavLink classname="nav-link" to="/dashboard">
+                <NavLink className="nav-link" to="/dashboard">
                   Dashboard
                 </NavLink>
               </li>
               <li>
-                <a
-                  classname="nav-link"
+                <a 
+                  className="nav-link"
                   style={{ cursor: "pointer" }}
                   onClick={handleLogout}
                   data-bs-dismiss="offcanvas"

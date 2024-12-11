@@ -7,7 +7,7 @@ const Sidebar = () => {
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {    
+  const handleLogout = () => {
     setAuth({
       user: null,
       token: "",
@@ -17,33 +17,31 @@ const Sidebar = () => {
     navigate("/login");
   };
 
-
   return (
     <>
       <div>
         <button
-          className="btn btn-primary"
+          class="btn btn-primary"
           type="button"
           data-bs-toggle="offcanvas"
-          data-bs-target="#staticBackdrop"
-          aria-controls="staticBackdrop"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight"
         >
           {auth.user?.name || auth.user.username}
         </button>
         <div
-          className="offcanvas offcanvas-end"
-          data-bs-backdrop="static"
-          tabIndex={-1}
-          id="staticBackdrop"
-          aria-labelledby="staticBackdropLabel"
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          id="offcanvasRight"
+          aria-labelledby="offcanvasRightLabel"
         >
           <div className="offcanvas-header">
-            <h5 className="offcanvas-title" id="staticBackdropLabel">
+            <h5 id="offcanvasRightLabel">
               Hey, {auth.user?.name || auth.user.username}
             </h5>
             <button
               type="button"
-              className="btn-close"
+              className="btn-close text-reset"
               data-bs-dismiss="offcanvas"
               aria-label="Close"
             />
@@ -56,7 +54,7 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li>
-                <a 
+                <a
                   className="nav-link"
                   style={{ cursor: "pointer" }}
                   onClick={handleLogout}

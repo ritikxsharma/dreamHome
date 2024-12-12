@@ -4,40 +4,62 @@ import { useNavigate } from "react-router-dom";
 import getImageURL from "../../../getImageURL";
 
 const AdCreate = () => {
-  const [selectedOption, setSelectedOption] = useState("");
+  const [hoveredOption, setHoveredOption] = useState("");
 
-  const handleSelecetedOption = (e) => {
-    setSelectedOption(e.currentTarget.id);
+  const navigate = useNavigate();
+
+  const handleMouseEnter = (e) => {
+    setHoveredOption(e.currentTarget.id);
   };
+  const handleMouseLeave = () => {
+    setHoveredOption("")
+  }
 
   const renderOptionsBtns = () => {
     return (
-      <div
-      className="d-flex justify-content-between p-4"
-      >
-        <button type="button" class="btn btn-light">House</button>
-        <button type="button" class="btn btn-light">Land</button>
+      <div className="d-flex justify-content-between p-4">
+        <button
+          type="button"
+          class="btn btn-light"
+          onClick={() => navigate(`/ad/create/${hoveredOption}/house`)}
+        >
+          House
+        </button>
+        <button
+          type="button"
+          class="btn btn-light"
+          onClick={() => navigate(`/ad/create/${hoveredOption}/land`)}
+        >
+          Land
+        </button>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <>
       <div>
-        <h1 className="display-1 bg-primary text-light p-5">Ad Create</h1>
+        <h1 className="display-1 bg-primary text-light p-5 ">Ad Create</h1>
         <Tabs />
 
         <div
           className="d-flex justify-content-center align-items-center gap-5 p-4 vh-100"
-          style={{ marginTop: "-11%" }}
+          style={{marginTop: "-9rem"}}
         >
           <div
-            className={`card btn btn-success ${selectedOption === 'sell' ? 'expanded active' : ""}`}
-            style={{ cursor: "pointer"}}
+            className={`card btn btn-success ${
+              hoveredOption === "sell" ? "expanded active" : ""
+            }`}
+            style={{ cursor: "pointer" }}
             id="sell"
-            onClick={handleSelecetedOption}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
-            <img className="card-img" src={getImageURL("forSaleAd")} alt="Card image cap" />
+            <img
+              className="card-img"
+              src={getImageURL("forSaleAd")}
+              alt="Card image cap"
+            />
             <div className="card-body">
               <h5 className="card-title">Sell Your Property</h5>
               <p className="card-text">
@@ -46,20 +68,23 @@ const AdCreate = () => {
                 easily. Post your ad today!
               </p>
             </div>
-            {
-              selectedOption === "sell" && (
-                renderOptionsBtns()
-              )
-            }
+            {hoveredOption === "sell" && renderOptionsBtns()}
           </div>
 
           <div
-            className={`card btn btn-success ${selectedOption === 'rent' ? 'expanded active' : ""}`}
-            style={{ cursor: "pointer"}}
+            className={`card btn btn-success ${
+              hoveredOption === "rent" ? "expanded active" : ""
+            }`}
+            style={{ cursor: "pointer" }}
             id="rent"
-            onClick={handleSelecetedOption}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
-            <img className="card-img" src={getImageURL("forRentAd")} alt="Card image cap" />
+            <img
+              className="card-img"
+              src={getImageURL("forRentAd")}
+              alt="Card image cap"
+            />
             <div className="card-body">
               <h5 className="card-title">Rent Out Your Property</h5>
               <p className="card-text">
@@ -67,11 +92,7 @@ const AdCreate = () => {
                 Make your rental process seamless and hassle-free!
               </p>
             </div>
-            {
-              selectedOption === "rent" && (
-                renderOptionsBtns()
-              )
-            }
+            {hoveredOption === "rent" && renderOptionsBtns()}
           </div>
         </div>
       </div>

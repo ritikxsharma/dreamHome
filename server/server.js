@@ -12,12 +12,13 @@ const app = express()
 connectDB()
 
 //middlewares
-app.use(express.json())
+app.use(express.json({ limit: "10mb" }))
 app.use(morgan(`dev`))
 app.use(cors())
 
 //auth routing
 app.use('/api/auth', require('./routes/authRouter'))
+app.use('/api/auth/images/', require('./routes/adRouter'))
 
 //error handler middleware
 app.use(errorHandler)

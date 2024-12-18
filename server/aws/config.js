@@ -8,5 +8,9 @@ const awsConfig = {
 }
 
 const AWS_SES = new aws.SES(awsConfig)
+const AWS_S3 = new aws.S3(awsConfig)
 
-module.exports = AWS_SES
+module.exports = {
+    AWS_SES,
+    AWS_S3
+}

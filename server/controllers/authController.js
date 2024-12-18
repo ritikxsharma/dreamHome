@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const AWS_SES = require("../aws/config")
+const { AWS_SES } = require("../aws/config")
 const emailSubjects = require('../helpers/emailSubjects')
 const emailContents = require('../helpers/emailContents')
 const emailTemplate = require('../helpers/emailTemplate')

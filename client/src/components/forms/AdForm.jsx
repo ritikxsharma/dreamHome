@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CurrencyInput from "react-currency-input-field";
+import ImageUpload from "./ImageUpload";
 
 const AdForm = ({ action, type }) => {
   const [ad, setAd] = useState({
@@ -19,6 +20,9 @@ const AdForm = ({ action, type }) => {
 
   return (
     <>
+
+      <ImageUpload ad={ad} setAd={setAd} />
+
       <CurrencyInput
         placeholder="Enter price"
         defaultValue={ad.price}

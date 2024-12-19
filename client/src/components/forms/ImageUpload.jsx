@@ -1,13 +1,13 @@
 import axios from "axios";
 import React from "react";
 import Resizer from "react-image-file-resizer";
+import { Avatar } from "antd";
 
 const ImageUpload = ({ ad, setAd }) => {
   const handleUpload = async (e) => {
     try {
       let files = e.target.files;
       files = [...files];
-      console.log(files);
 
       if (files?.length) {
         setAd({ ...ad, uploading: true });
@@ -28,7 +28,7 @@ const ImageUpload = ({ ad, setAd }) => {
 
                   setAd((prev) => ({
                     ...prev,
-                    photos: [...prev.photos, res.data],
+                    photos: [...prev.photos, res.data.data],
                   }));
                 } catch (error) {
                   console.log(error);
@@ -39,16 +39,29 @@ const ImageUpload = ({ ad, setAd }) => {
           });
         });
       }
-      console.log(ad);
+
+      setAd({ ...ad, uploading: false });
     } catch (error) {
       console.log(error);
       setAd({ ...ad, uploading: false });
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (file) => {
+    const answer = window.confirm("Delete Image?");
+    if (!answer) return;
+
     try {
-      setAd({ ...ad, uploading: true });
+      const res = await axios.post("/images/remove-image", file);
+      console.log(res.status);
+      
+      if (res.status === 200) {
+        setAd((prev) => ({
+          ...prev,
+          photos: prev.photos.filter((photo) => photo.Key !== file.Key),
+          uploading: false
+        }));
+      }
     } catch (error) {
       setAd({ ...ad, uploading: false });
       console.log(error);
@@ -57,8 +70,8 @@ const ImageUpload = ({ ad, setAd }) => {
 
   return (
     <>
-      <label className="btn btn-light mb-2">
-        Upload Photos
+      <label className="btn btn-primary mb-2">
+        {ad.uploading ? "Uploading in process..." : "Upload Photos"}
         <input
           type="file"
           className="form-control"
@@ -68,6 +81,15 @@ const ImageUpload = ({ ad, setAd }) => {
           onChange={handleUpload}
         />
       </label>
+      {ad.photos?.map((photo) => (
+        <Avatar
+          src={photo?.Location}
+          shape="square"
+          size="46"
+          className="mx-2 mb-2"
+          onClick={() => handleDelete(photo)}
+        />
+      ))}
     </>
   );
 };
